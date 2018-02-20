@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.List;
 
 import br.com.alura.ceep.R;
@@ -40,12 +38,12 @@ public class ListaNotasActivity extends AppCompatActivity {
         botaoInsereNota.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vaiParaFormularioNotaActivity();
+                vaiParaFormularioNotaActivityInsere();
             }
         });
     }
 
-    private void vaiParaFormularioNotaActivity() {
+    private void vaiParaFormularioNotaActivityInsere() {
         Intent iniciaFormularioNota =
                 new Intent(ListaNotasActivity.this,
                         FormularioNotaActivity.class);
@@ -115,13 +113,17 @@ public class ListaNotasActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(Nota nota, int posicao) {
-                Intent abreFormularioComNota = new Intent(ListaNotasActivity.this,
-                        FormularioNotaActivity.class);
-                abreFormularioComNota.putExtra(CHAVE_NOTA, nota);
-                abreFormularioComNota.putExtra("posicao", posicao);
-                startActivityForResult(abreFormularioComNota, 2);
+                vaiParaFormularioNotaActivityAltera(nota, posicao);
             }
         });
+    }
+
+    private void vaiParaFormularioNotaActivityAltera(Nota nota, int posicao) {
+        Intent abreFormularioComNota = new Intent(ListaNotasActivity.this,
+                FormularioNotaActivity.class);
+        abreFormularioComNota.putExtra(CHAVE_NOTA, nota);
+        abreFormularioComNota.putExtra(CHAVE_POSICAO, posicao);
+        startActivityForResult(abreFormularioComNota, 2);
     }
 
 }
