@@ -22,7 +22,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
     private final Context context;
     private OnItemClickListener onItemClickListener;
 
-    public ListaNotasAdapter(Context context, List<Nota> notas){
+    public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
         this.notas = notas;
     }
@@ -56,12 +56,12 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     public void remove(int posicao) {
         notas.remove(posicao);
-        notifyDataSetChanged();
+        notifyItemRemoved(posicao);
     }
 
     public void troca(int posicaoInicial, int posicaoFinal) {
         Collections.swap(notas, posicaoInicial, posicaoFinal);
-        notifyDataSetChanged();
+        notifyItemMoved(posicaoInicial, posicaoFinal);
     }
 
     class NotaViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +82,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
             });
         }
 
-        public void vincula(Nota nota){
+        public void vincula(Nota nota) {
             this.nota = nota;
             preencheCampo(nota);
         }
@@ -93,7 +93,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         }
     }
 
-    public void adiciona(Nota nota){
+    public void adiciona(Nota nota) {
         notas.add(nota);
         notifyDataSetChanged();
     }
