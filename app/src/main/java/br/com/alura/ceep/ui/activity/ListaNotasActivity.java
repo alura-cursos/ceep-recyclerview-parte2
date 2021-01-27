@@ -3,9 +3,11 @@ package br.com.alura.ceep.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +65,7 @@ public class ListaNotasActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             dao.insere(
                     new Nota("Título " + (i + 1),
-                    "Descrição " + (i + 1)));
+                            "Descrição " + (i + 1)));
         }
         return dao.todos();
     }
@@ -73,18 +75,18 @@ public class ListaNotasActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (ehResultadoInsereNota(requestCode, data)) {
 
-            if(resultadoOk(resultCode)){
+            if (resultadoOk(resultCode)) {
                 Nota notaRecebida = (Nota) data.getSerializableExtra(CHAVE_NOTA);
                 adiciona(notaRecebida);
             }
 
         }
 
-        if(ehResultadoAlteraNota(requestCode, data)){
-            if(resultadoOk(resultCode)){
+        if (ehResultadoAlteraNota(requestCode, data)) {
+            if (resultadoOk(resultCode)) {
                 Nota notaRecebida = (Nota) data.getSerializableExtra(CHAVE_NOTA);
                 int posicaoRecebida = data.getIntExtra(CHAVE_POSICAO, POSICAO_INVALIDA);
-                if(ehPosicaoValida(posicaoRecebida)){
+                if (ehPosicaoValida(posicaoRecebida)) {
                     altera(notaRecebida, posicaoRecebida);
                 } else {
                     Toast.makeText(this,

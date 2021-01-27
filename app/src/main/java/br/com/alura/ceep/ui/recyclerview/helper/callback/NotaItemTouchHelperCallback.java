@@ -1,7 +1,8 @@
 package br.com.alura.ceep.ui.recyclerview.helper.callback;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import br.com.alura.ceep.dao.NotaDAO;
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter;
@@ -15,7 +16,7 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+    public int getMovementFlags(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         int marcacoesDeDeslize = ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
         int marcacoesDeArrastar = ItemTouchHelper.DOWN | ItemTouchHelper.UP
                 | ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT;
@@ -23,7 +24,7 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+    public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         int posicaoInicial = viewHolder.getAdapterPosition();
         int posicaoFinal = target.getAdapterPosition();
         trocaNotas(posicaoInicial, posicaoFinal);
